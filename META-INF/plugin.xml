@@ -1,0 +1,48 @@
+<idea-plugin version="2">
+	<id>org.librucha.intellij.plugin.data-generator</id>
+	<name>Data generator plugin</name>
+	<version>1.0</version>
+	<vendor email="librucha@gmail.com" url="http://www.librucha.com">librucha</vendor>
+
+	<description><![CDATA[
+    Plugin for easy data generating from POJO objects.<br>
+    ]]></description>
+
+	<change-notes><![CDATA[
+    <ul>
+      <li><b>139.872</b> - JSON generator</li>
+    </ul>
+    ]]>
+	</change-notes>
+
+	<!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+	<idea-version since-build="139"/>
+
+	<!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+		 on how to target different products -->
+	<!-- uncomment to enable plugin in all products
+	<depends>com.intellij.modules.lang</depends>
+	-->
+
+	<extensions defaultExtensionNs="com.intellij">
+		<!-- Add your extensions here -->
+	</extensions>
+
+	<application-components>
+		<!-- Add your application components here -->
+	</application-components>
+
+	<project-components>
+		<!-- Add your project components here -->
+	</project-components>
+
+	<actions>
+		<action id="DataGenerator.generate"
+		        class="org.librucha.intellij.plugin.datagenerator.DataGeneratorAction"
+		        text="Generate data file" description="${project.description}">
+			<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="JavaGenerateGroup2"/>
+			<keyboard-shortcut keymap="$default" first-keystroke="shift alt D"/>
+		</action>
+	</actions>
+
+</idea-plugin>

@@ -1,12 +1,15 @@
 package org.librucha.intellij.plugin.datagenerator;
 
 import com.google.gson.*;
+import com.intellij.json.JsonLanguage;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.PsiClassReferenceType;
 import com.intellij.psi.util.TypeConversionUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -23,7 +26,10 @@ public class DataGeneratorActionHandler implements LanguageCodeInsightActionHand
 	@Override
 	public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile psiFile) {
 		JsonObject jsonObject = constructJson(psiFile);
-		System.out.println(GSON.toJson(jsonObject));
+
+		String fileName = StringUtils.substringBeforeLast(psiFile.getName(), ".");
+		PsiFile newPsiFile = PsiFileFactory.getInstance(project).createFileFromText(fileName, JsonLanguage.INSTANCE, GSON.toJson(jsonObject));
+		FileEditorManager.getInstance(project).openFile(newPsiFile.getVirtualFile(), true);
 	}
 
 	private JsonObject constructJson(PsiFile psiFile) {

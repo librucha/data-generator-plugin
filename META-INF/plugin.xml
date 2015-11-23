@@ -30,6 +30,9 @@
 
 	<application-components>
 		<!-- Add your application components here -->
+		<component>
+			<implementation-class>org.librucha.intellij.plugin.datagenerator.DataGeneratorComponent</implementation-class>
+		</component>
 	</application-components>
 
 	<project-components>
